@@ -6,6 +6,8 @@ namespace AppBundle\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity
@@ -33,11 +35,65 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @var string
+     * @Assert\NotBlank(message="You must specify user name.")
+     *
+     * @ORM\Column(name="name", type="string", length=100)
+     */
+    protected $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="surname", type="string", length=100)
+     */
+    protected $surname;
+
     public function __construct()
     {
         parent::__construct();
+
         $this->comments = new ArrayCollection();
         $this->ratings = new ArrayCollection();
         // your own logic
     }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return User
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSurname()
+    {
+        return $this->surname;
+    }
+
+    /**
+     * @param string $surname
+     * @return User
+     */
+    public function setSurname($surname)
+    {
+        $this->surname = $surname;
+        return $this;
+    }
+
+
 }
