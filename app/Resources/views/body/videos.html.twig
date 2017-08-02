@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div id="div" class="div">
+        Odcinki
+    </div>
+
+
+        <div>
+            <ul>
+    {% for value in arr %}
+                <li>{{ value.title }}</li>
+    {% endfor %}
+            </ul>
+            <div><a href="/koszyk"><button>Zakup</button></a></div>
+        </div>
+
+{% endblock body %}

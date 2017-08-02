@@ -1,7 +1,15 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <div>
-        List of courses
+    <div id="div" class="div">
+       Courses
     </div>
+
+    {% for value in arr %}
+       <div>
+           <div><h3>{{ value.title }}</h3></div>
+           <div>{{ value.description }}</div>
+           <div><a href="/{{value.id }}/tutorial"><button>Czytaj więcej</button></a></div>
+       </div>
+     {% endfor %}
 {% endblock body %}
