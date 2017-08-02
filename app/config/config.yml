@@ -72,3 +72,6 @@ fos_user:
     from_email:
             address: "mama@mama.pl"
             sender_name: "mama"
+    registration:
+        form:
+            type: AppBundle\Form\RegistrationType
