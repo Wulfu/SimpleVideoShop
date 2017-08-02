@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Tutorial
@@ -12,6 +13,18 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Tutorial
 {
+
+    /**
+     * One Tutorial has Many Videos.
+     * @ORM\OneToMany(targetEntity="Video", mappedBy="tutorial")
+     */
+    private $videos;
+
+    public function __construct() {
+        $this->videos = new ArrayCollection();
+    }
+
+
     /**
      * @var int
      *

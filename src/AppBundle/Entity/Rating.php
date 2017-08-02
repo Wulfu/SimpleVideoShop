@@ -13,6 +13,20 @@ use Doctrine\ORM\Mapping as ORM;
 class Rating
 {
     /**
+     * Many Ratings have One User.
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="ratings")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
+    /**
+     * Many Ratings have One Video.
+     * @ORM\ManyToOne(targetEntity="Video", inversedBy="ratings")
+     * @ORM\JoinColumn(name="video_id", referencedColumnName="id")
+     */
+    private $video;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")

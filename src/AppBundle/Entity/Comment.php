@@ -13,6 +13,21 @@ use Doctrine\ORM\Mapping as ORM;
 class Comment
 {
     /**
+     * Many Comments have One Video.
+     * @ORM\ManyToOne(targetEntity="Video", inversedBy="comments")
+     * @ORM\JoinColumn(name="video_id", referencedColumnName="id")
+     */
+    private $video;
+
+    /**
+     * Many Comments have One User.
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="comments")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
+
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")

@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Video
@@ -12,6 +13,34 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Video
 {
+
+
+    /**
+     * Many Videos have One Tutorial.
+     * @ORM\ManyToOne(targetEntity="Tutorial", inversedBy="videos")
+     * @ORM\JoinColumn(name="tutorial_id", referencedColumnName="id")
+     */
+    private $tutorial;
+
+    /**
+     * One Video has Many Ratings.
+     * @ORM\OneToMany(targetEntity="Rating", mappedBy="user")
+     */
+    private $ratings;
+
+
+    /**
+     * One Video has Many Comments.
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="video")
+     */
+    private $comments;
+
+    public function __construct() {
+        $this->ratings= new ArrayCollection();
+        $this->comments = new ArrayCollection();
+    }
+
+
     /**
      * @var int
      *
