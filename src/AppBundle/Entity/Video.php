@@ -14,6 +14,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Video
 {
 
+    /**
+     * One Video has Many ClientOrder.
+     * @ORM\OneToMany(targetEntity="ClientOrder", mappedBy="video")
+     */
+    private $clientOrders;
+
 
     /**
      * Many Videos have One Tutorial.

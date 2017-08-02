@@ -13,15 +13,18 @@ use Doctrine\ORM\Mapping as ORM;
 class ClientOrder
 {
     /**
-     * Many Users have Many Orders.
-     * @ORM\ManyToMany(targetEntity="Group", inversedBy="users")
-     * @ORM\JoinTable(name="users_groups")
+     * Many ClientOrders have One User.
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="clientOrders")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    private $clientOrders;
+    private $user;
 
-    public function __construct() {
-        $this->clientOrders = new ArrayCollection();
-    }
+    /**
+     * Many ClientOrders have One Video.
+     * @ORM\ManyToOne(targetEntity="Video", inversedBy="clientOrders")
+     * @ORM\JoinColumn(name="video_id", referencedColumnName="id")
+     */
+    private $video;
 
     /**
      * @var int

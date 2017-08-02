@@ -15,6 +15,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User extends BaseUser
 {
+
+    /**
+     * One User has Many ClientOrder.
+     * @ORM\OneToMany(targetEntity="ClientOrder", mappedBy="user")
+     */
+    private $clientOrders;
+
     /**
      * One User has Many Comments.
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="user")
@@ -56,6 +63,7 @@ class User extends BaseUser
 
         $this->comments = new ArrayCollection();
         $this->ratings = new ArrayCollection();
+        $this->clientOrders= new ArrayCollection();
         // your own logic
     }
 
