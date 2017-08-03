@@ -33,7 +33,11 @@ class DefaultController extends Controller
      */
     public function koszykAction()
     {
-        return $this->render('body/koszyk.html.twig');
+        $securityContext = $this->container->get('security.authorization_checker');
+        if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return $this->render('body/koszyk.html.twig');
+        }
+        return $this->redirect("/login");
     }
 
     /**
@@ -54,6 +58,4 @@ class DefaultController extends Controller
                 'videos'=>$videos,
              'comments'=>$comments]);
     }
-
-
 }
