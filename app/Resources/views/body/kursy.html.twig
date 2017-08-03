@@ -1,15 +1,19 @@
 {% extends "base.html.twig" %}
 
-{% block body %}
-    <div id="div" class="div">
-       Courses
-    </div>
 
+
+{% block body %}
+ <div class="container">
     {% for value in arr %}
-       <div>
-           <div><h3>{{ value.title }}</h3></div>
-           <div>{{ value.description }}</div>
-           <div><a href="/{{value.id }}/tutorial"><button>Czytaj więcej</button></a></div>
-       </div>
-     {% endfor %}
+    <div class="single">
+        <h1>{{ value.title }}</h1>
+        <img src="{{ asset("img/300X150.png") }}" alt="tutorial img" class="pull-left margin10">
+        <article>
+            <p>{{ value.description }} </p>
+            <a class="pull-right " href="/{{value.id }}/tutorial"><button>Czytaj więcej</button></a>
+        </article>
+    </div>
+        <br>
+    {% endfor %}
+</div>
 {% endblock body %}
