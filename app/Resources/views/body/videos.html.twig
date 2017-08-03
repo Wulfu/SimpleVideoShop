@@ -1,18 +1,37 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <div id="div" class="div">
-        Odcinki
+    <div class="container" style="height: 300px">
+        <div>Little navigation</div>
+
+        <div class="pull-left player"> <img src="{{ asset("img/player.png") }}" alt="tutorial img" class="pull-left margin10"></div>
+
+
+        <div class="list_videos">
+
+    {% for value in videos %}
+                <a href="/{{ tutorial[0].id }}/tutorial/{{ value.id }}"><p id="single_video">{{ value.title }}</p></a>
+    {% endfor %}
+
+        </div>
+
+        <p class="button_buy"><a href="/buy/{{ tutorial[0].id }}"><button>Kup tutorial</button></a></p>
     </div>
 
 
-        <div>
-            <ul>
-    {% for value in arr %}
-                <li>{{ value.title }}</li>
-    {% endfor %}
-            </ul>
-            <div><a href="/koszyk"><button>Zakup</button></a></div>
-        </div>
+
+    <br>
+    <div class="container">
+        {% for value in comments %}
+            <div class="single">
+                <h1>User</h1>
+                <div>
+                    <p>{{ value.content }} </p>
+                </div>
+
+            </div>
+        {% endfor %}
+
+    <div>
 
 {% endblock body %}

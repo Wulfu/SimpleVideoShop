@@ -10,10 +10,13 @@
         <img src="{{ asset("img/300X150.png") }}" alt="tutorial img" class="pull-left margin10">
         <article>
             <p>{{ value.description }} </p>
-            <a class="pull-right " href="/{{value.id }}/tutorial"><button>Czytaj więcej</button></a>
+            <a class="pull-right " href="/{{value.id }}/tutorial/0"><button>Czytaj więcej</button></a>
         </article>
+
     </div>
+
         <br>
+        <hr>
     {% endfor %}
 </div>
 {% endblock body %}
