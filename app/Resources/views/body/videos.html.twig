@@ -22,15 +22,16 @@
 
     <br>
     <div class="container">
-        {% for value in comments %}
-            <div class="single">
-                <h1>User</h1>
-                <div>
-                    <p>{{ value.content }} </p>
-                </div>
+        {{ form(form) }}
+            {% for value in comments %}
+                <div class="single">
+                    <h1>User</h1>
+                    <div>
+                        <p>{{ value.content }} </p>
+                    </div>
 
-            </div>
-        {% endfor %}
+                </div>
+            {% endfor %}
 
     <div>
 

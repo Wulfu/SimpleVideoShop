@@ -3,12 +3,15 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\ClientOrder;
+use AppBundle\Entity\Comment;
+use AppBundle\Form\CommentType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Tutorial;
 use AppBundle\Entity\Video;
 use AppBundle\Entity\User;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class DefaultController extends Controller
 {
@@ -66,21 +69,36 @@ class DefaultController extends Controller
     /**
      * @Route("/{id}/tutorial/{id_video}", defaults={"id_video"=0})
      */
-    public function tutorialByIdAction($id,$id_video)
+    public function tutorialByIdAction(Request $request, $id, $id_video)
     {
         $em=$this->getDoctrine()->getManager();
+
         $videos=$em->getRepository('AppBundle:Video')->findByTutorial($id);
-
-
         $tutorial=$em->getRepository('AppBundle:Tutorial')->findById($id);
-
         $comments=$em->getRepository('AppBundle:Comment')->findByVideo($id_video);
 
+        $comment = new Comment();
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        $comment->setUser($user);
+        $comment->setVideo($id_video);
 
-        return $this->render('body/videos.html.twig',
-            ['tutorial'=>$tutorial,
-                'videos'=>$videos,
-             'comments'=>$comments]);
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setData(date('d/m/Y H:i:s'));
+            //dump($comment);die;
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($comment);
+            $em->flush();
+        }
+
+
+        return $this->render('body/videos.html.twig', [
+            'tutorial'=>$tutorial,
+            'videos'=>$videos,
+            'form'=> $form->createView(),
+            'comments'=>$comments]);
 
     }
 
