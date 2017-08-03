@@ -25,7 +25,7 @@ class DefaultController extends Controller
     /**
      * @Route("/o_mnie", name="o_mnie")
      */
-    public function oMnieAction()
+    public function AboutMeAction()
     {
         return $this->render('body/o_mnie.html.twig');
     }
@@ -143,7 +143,7 @@ class DefaultController extends Controller
     /**
      * @Route("/moje_kursy")
      */
-    public function UserBasketAction(Request $request){
-        //
+    public function UserTutorialsAction(){
+
     }
 }

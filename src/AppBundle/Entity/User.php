@@ -126,5 +126,21 @@ class User extends BaseUser
         $this->user_coins = $user_coins;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getClientOrders()
+    {
+        return $this->clientOrders;
+    }
+
+    /**
+     * @param mixed $clientOrders
+     */
+    public function setClientOrders($clientOrders)
+    {
+        $this->clientOrders = $clientOrders;
+    }
+
 
 }
