@@ -93,6 +93,32 @@ class DefaultController extends Controller
             $session->set('tutorial', $tutorials);
         }
         return $this->redirectToRoute('koszyk');
+    }
 
+    /**
+     * @Route("/realizacja")
+     */
+    public function orderRealisationAction(Request $request){
+
+        $session = $request->getSession();
+        $tutorials = $session->get('tutorial');
+        $coins=0;
+        foreach ($tutorials as $tutorial){
+            $coins+=$tutorial->getCoins();
+        }
+        $user_coins = $this->container->get('security.context')->getToken()->getUser()->getUserCoins();
+        if($coins>$user_coins){
+            $info="Nie masz wystarczających środków aby dokonać zakupu";
+            return $this>redirectToRoute('koszyk', ['info'=>$info]);
+        }else{
+            return $this->redirect('/moje_kursy');
+        }
+    }
+
+    /**
+     * @Route("/moje_kursy")
+     */
+    public function UserBasketAction(Request $request){
+        //
     }
 }
