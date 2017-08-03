@@ -74,21 +74,25 @@ class DefaultController extends Controller
         $em=$this->getDoctrine()->getManager();
 
         $videos=$em->getRepository('AppBundle:Video')->findByTutorial($id);
+
+        $video=$em->getRepository('AppBundle:Video')->findById($id_video);
+
         $tutorial=$em->getRepository('AppBundle:Tutorial')->findById($id);
         $comments=$em->getRepository('AppBundle:Comment')->findByVideo($id_video);
 
-
         $comment = new Comment();
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        $comment->setUser($user);
+        $comment->setVideo($video[0]);
+
 
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $time = (new \DateTime());
+            $comment->setData(($time));
 
-            $user = $this->container->get('security.context')->getToken()->getUser();
-            $comment->setData(new \DateTime);
-            $comment->setUser($user);
-            $comment->setVideo($videos[0]);
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush();
