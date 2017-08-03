@@ -1,9 +1,22 @@
+body{
+    background-color: #f2f2f2;
 
+}
 .container{
+    border: solid;
+    border-width: 1px;
+    border-radius: 10px;
     margin-left: 15%;
     margin-right: 15%;
     background-color: #ffffff;
 }
+
+.slider{
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-bottom: 10px;
+}
+
 .single{
     margin-left: 2%;
     margin-right: 2%;
@@ -17,10 +30,6 @@
 }
 
 .margin10{margin-bottom:10px; margin-right:10px;}
-
-body{
-    background-color: #f2f2f2;
-}
 
 .loginbar{
     background-color: #333333;
@@ -36,24 +45,31 @@ body{
     height: 45px;
 }
 
-/*navbar*/
-.navbar{
-    margin-left: 15%;
-    margin-right: 15%;
-    height: 100px;
-    background-color: #3399ff;
-    margin-bottom: 10px;
-    text-align: center;
+.dashed-border{
+    border-bottom: dashed;
+    border-bottom-width: 2px;
+    border-color: #3399ff;
 }
 
+.bottom-border{
+    border-bottom: solid;
+    border-bottom-width: 5px;
+    border-color: #3399ff;
+}
+
+
+
+/*navbar*/
+
 ul {
+    border-radius: 10px;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-bottom: 10px;
     list-style-type: none;
-    margin: 0;
-    padding: 0;
     overflow: hidden;
     color:#000000;
     background-color: #ffffff;
-    height: 90px;
 }
 
 li {
@@ -73,6 +89,7 @@ li a:hover {
     background-color: #3399ff;
 }
 
+
 .list_videos{
     margin-left: 500px;
     margin-right: 10px;
@@ -86,10 +103,6 @@ li a:hover {
 .player{
     margin-left: 10px;
 }
-.button_buy{
-    clear: both;
-    float: right;
-}
 
 .mySlides {display:none}
 .w3-left, .w3-right, .w3-badge {cursor:pointer}
@@ -97,4 +110,88 @@ li a:hover {
 
 .div-margin10{
     margin: 10px;
+}
+
+
+/* main page - list available courses*/
+.tutorial{
+    margin:20px;
+
+}
+.tutorial-title{
+    width:100%;
+}
+.tutorial-content{
+    clear:both;
+    width:100%;
+}
+.tutorial-img{
+    float:left;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+.tutorial-desciption{
+    margin-bottom: 30px;
+}
+
+
+
+/*buttons configuration*/
+.buy{
+    background-color:#008000;
+    width:100px;
+    margin-left: 5px;
+}
+.read{
+    background-color: #66a3ff;
+}
+
+.realizuj{
+    background-color:#008000;
+    width:200px;
+}
+
+.button {
+    display: inline-block;
+    border-radius: 4px;
+
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 14px;
+    padding: 4px;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.button:hover span {
+    padding-right: 25px;
+}
+
+.button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+/*alert*/
+
+.alert{
+    text-align: center;
+
 }

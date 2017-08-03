@@ -3,20 +3,21 @@
 
 
 {% block body %}
- <div class="container">
-    {% for value in arr %}
-    <div class="single">
-        <h1>{{ value.title }}</h1>
-        <img src="{{ asset("img/300X150.png") }}" alt="tutorial img" class="pull-left margin10">
-        <article>
-            <p>{{ value.description }} </p>
-            <a class="pull-right " href="/{{value.id }}/tutorial/0"><button>Czytaj więcej</button></a>
-        </article>
+ <div class="container bottom-border">
 
-    </div>
+     {% for value in arr %}
+     <div class="tutorial dashed-border">
+        <div class="tutorial-title"><h3>{{ value.title }}</h3></div>
+         <div class="tutorial-content">
+             <div class="tutorial-img"><img src="{{ asset("img/300X150.png") }}" alt="tutorial img"></div>
+             <div class="tutorial-desciption">{{ value.description }}<br>
+                 <a class="pull-right" href="/{{value.id }}/tutorial/0"><button class="button buy" style="vertical-align:middle">Kup</button></a>
+                 <a class="pull-right" href="/{{value.id }}/tutorial/0"><button class="button read" style="vertical-align:middle"><span>Czytaj więcej</span></button></a>
+             </div>
+         </div>
 
-        <br>
-        <hr>
+     </div>
     {% endfor %}
+
 </div>
 {% endblock body %}

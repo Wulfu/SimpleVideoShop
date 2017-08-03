@@ -1,16 +1,23 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <div class="container">
+    <div class="container bottom-border">
         {% if not tutorials %}
-            <div><p>Twój koszyk jest pusty</p></div>
+           <p class="alert">Twój koszyk jest pusty</p>
         {% else %}
             {% for tutorial in tutorials %}
-                {{ tutorial[0].title }} <a href="{{ path('delete_from_busket', {'id': tutorial[0].id}) }}">Usuń z koszyka</a><br/>
+               <div class="basket">
+                   <div class="basket-title">
+                       {{ tutorial[0].title }}
+                   </div>
+                   <a class="basket-button" href="{{ path('delete_from_busket', {'id': tutorial[0].id}) }}">
+                       Usuń z koszyka
+                   </a>
+               </div>
+                <br/>
             {% endfor %}
+            <a class="pull-right" href="/realizacja"><button class="button realizuj" style="vertical-align:middle">Realizuj zamówienie</button></a>
         {% endif %}
-        Koszyk
-        <a href="/realizacja"><button>Realizuj amówienie</button></a>
+
     </div>
 {% endblock body %}
-{#{{ path('delete_from_busket', {'id': tutorial[0].id}) }}#}
