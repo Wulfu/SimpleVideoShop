@@ -1,0 +1,7 @@
+{% block body %}
+    <div class="container">
+        {% for value in client %}
+            {{ dump(value) }}
+        {% endfor %}
+    </div>
+{% endblock body %}

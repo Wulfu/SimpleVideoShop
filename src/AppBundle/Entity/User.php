@@ -136,11 +136,70 @@ class User extends BaseUser
 
     /**
      * @param mixed $clientOrders
+     * @return User
      */
     public function setClientOrders($clientOrders)
     {
         $this->clientOrders = $clientOrders;
+
+        return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param mixed $comments
+     * @return User
+     */
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRatings()
+    {
+        return $this->ratings;
+    }
+
+    /**
+     * @param mixed $ratings
+     * @return User
+     */
+    public function setRatings($ratings)
+    {
+        $this->ratings = $ratings;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     * @return User
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+
 
 
 }

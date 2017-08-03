@@ -143,7 +143,11 @@ class DefaultController extends Controller
     /**
      * @Route("/moje_kursy")
      */
-    public function UserTutorialsAction(){
-
+    public function UserBasketAction(Request $request){
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        $clientOrders = $user->getClientOrders();
+        return $this->render('body/client_videos.html.twig', [
+            'client' => $clientOrders
+        ]);
     }
 }
