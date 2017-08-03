@@ -37,10 +37,11 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $session = $request->getSession();
         $tutorials = $session->get('tutorial');
-        foreach($tutorials as $tutorialId){
-            $tutorialsToBuy[] = $em->getRepository('AppBundle:Tutorial')->findById($tutorialId);
+        if(isset($tutorials)) {
+            foreach ($tutorials as $tutorialId) {
+                $tutorialsToBuy[] = $em->getRepository('AppBundle:Tutorial')->findById($tutorialId);
+            }
         }
-
         return $this->render('body/koszyk.html.twig', [
             'tutorials' => $tutorialsToBuy
         ]);
@@ -86,11 +87,14 @@ class DefaultController extends Controller
     public function buyTutorialAction(Request $request, $id){
 
         $session = $request->getSession();
-        $tutorials = $session->get('tutorial');
-        if(!in_array($id, $tutorials)){
-            $tutorials[] = $id;
-            $session->set('tutorial', $tutorials);
+        if(null === $session->get('tutorial')){
+            $session->set('tutorial', []);
         }
+        $tutorials = $session->get('tutorial');
+            if (!in_array($id, $tutorials)) {
+                $tutorials[] = $id;
+                $session->set('tutorial', $tutorials);
+            }
         return $this->redirectToRoute('koszyk');
     }
 }
