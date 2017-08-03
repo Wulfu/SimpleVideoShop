@@ -37,7 +37,10 @@ class DefaultController extends Controller
         if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->render('body/koszyk.html.twig');
         }
+<<<<<<< HEAD
         return $this->redirect("/login");
+=======
+>>>>>>> b62fbf095bbc16196058d58695ce31bd47fff359
     }
 
     /**
@@ -47,6 +50,7 @@ class DefaultController extends Controller
     {
         $em=$this->getDoctrine()->getManager();
         $videos=$em->getRepository('AppBundle:Video')->findByTutorial($id);
+<<<<<<< HEAD
 
         $tutorial=$em->getRepository('AppBundle:Tutorial')->findById($id);
 
@@ -57,5 +61,8 @@ class DefaultController extends Controller
             ['tutorial'=>$tutorial,
                 'videos'=>$videos,
              'comments'=>$comments]);
+=======
+        return $this->render('body/videos.html.twig',['arr'=>$videos]);
+>>>>>>> b62fbf095bbc16196058d58695ce31bd47fff359
     }
 }
