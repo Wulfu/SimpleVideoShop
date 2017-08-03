@@ -91,7 +91,8 @@ li a:hover {
 
 
 .list_videos{
-    margin-left: 500px;
+    float:right;
+    width:47%;
     margin-right: 10px;
 }
 
@@ -101,7 +102,10 @@ li a:hover {
     background-color: #6c6159;
 }
 .player{
+    float:left;
     margin-left: 10px;
+
+    position:relative;height:0;padding-bottom:55.56%;
 }
 
 .mySlides {display:none}
@@ -147,8 +151,14 @@ li a:hover {
 }
 
 .realizuj{
-    background-color:#008000;
+    background-color:#5cb85c;
     width:200px;
+}
+
+.usun{
+    background-color: #d9534f;
+    width:100px;
+    height:30px;
 }
 
 .button {
@@ -193,5 +203,20 @@ li a:hover {
 
 .alert{
     text-align: center;
+}
+.margin30{
+    margin-bottom:30px;
+}
 
+.basket{
+    display: block;
+    margin:10px;
+    margin-bottom:30px;
+}
+.basket-title{
+    font-size: 20px;
+    width:80%;
+    float:left;
+    margin-left: 5px;
+    margin-bottom:30px;
 }
