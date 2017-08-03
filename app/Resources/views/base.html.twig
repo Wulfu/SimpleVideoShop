@@ -9,7 +9,7 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block loginbar %}{% endblock %}
+        {% block loginbar %}{% include 'loginbar/loginbar.html.twig' %}{% endblock %}
         {% block navbar %}{% include 'navbar/navbar.html.twig' %}{% endblock %}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
