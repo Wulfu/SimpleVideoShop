@@ -15,13 +15,6 @@ class Video
 {
 
     /**
-     * One Video has Many ClientOrder.
-     * @ORM\OneToMany(targetEntity="ClientOrder", mappedBy="video")
-     */
-    private $clientOrders;
-
-
-    /**
      * Many Videos have One Tutorial.
      * @ORM\ManyToOne(targetEntity="Tutorial", inversedBy="videos")
      * @ORM\JoinColumn(name="tutorial_id", referencedColumnName="id")

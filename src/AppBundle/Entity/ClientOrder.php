@@ -20,11 +20,11 @@ class ClientOrder
     private $user;
 
     /**
-     * Many ClientOrders have One Video.
-     * @ORM\ManyToOne(targetEntity="Video", inversedBy="clientOrders")
-     * @ORM\JoinColumn(name="video_id", referencedColumnName="id")
+     * Many ClientOrders have One Tutorial.
+     * @ORM\ManyToOne(targetEntity="Tutorial", inversedBy="clientOrders")
+     * @ORM\JoinColumn(name="tutorial_id", referencedColumnName="id")
      */
-    private $video;
+    private $tutorial;
 
     /**
      * @var int
@@ -38,7 +38,7 @@ class ClientOrder
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime")
+     * @ORM\Column(name="date", type="datetime", nullable=true)
      */
     private $date;
 
@@ -75,4 +75,38 @@ class ClientOrder
     {
         return $this->date;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTutorial()
+    {
+        return $this->tutorial;
+    }
+
+    /**
+     * @param mixed $tutorial
+     */
+    public function setTutorial($tutorial)
+    {
+        $this->tutorial = $tutorial;
+    }
+
+
 }

@@ -2,11 +2,13 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\ClientOrder;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Tutorial;
 use AppBundle\Entity\Video;
+use AppBundle\Entity\User;
 
 class DefaultController extends Controller
 {
@@ -106,16 +108,35 @@ class DefaultController extends Controller
 
         $session = $request->getSession();
         $tutorials = $session->get('tutorial');
+        $em = $this->getDoctrine()->getManager();
         $coins=0;
-        foreach ($tutorials as $tutorial){
-            $coins+=$tutorial->getCoins();
+        /* to correct */
+        foreach ($tutorials as $id){
+            $tutorial=$em->getRepository('AppBundle:Tutorial')->findById($id);
+            $coins+=$tutorial[0]->getCoins();
         }
-        $user_coins = $this->container->get('security.context')->getToken()->getUser()->getUserCoins();
+        $user=$this->container->get('security.context')->getToken()->getUser();
+        $user_coins = $user->getUserCoins();
+
         if($coins>$user_coins){
             $info="Nie masz wystarczających środków aby dokonać zakupu";
             return $this>redirectToRoute('koszyk', ['info'=>$info]);
         }else{
-            return $this->redirect('/moje_kursy');
+            foreach ($tutorials as $id){
+
+                $tutorial=$em->getRepository('AppBundle:Tutorial')->findOneById($id);
+                $order=new ClientOrder();
+                $order->setUser($user);
+                $order->setTutorial($tutorial);
+                $em->persist($order);
+                $em->flush();
+            }
+            $user->setUserCoins($user_coins-$coins);
+            $em->flush();
+            $session->invalidate();
+
+
+            return $this->redirect('/');
         }
     }
 

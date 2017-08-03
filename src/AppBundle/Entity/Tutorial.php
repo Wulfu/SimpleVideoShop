@@ -15,6 +15,12 @@ class Tutorial
 {
 
     /**
+     * One Tutorial has Many ClientOrder.
+     * @ORM\OneToMany(targetEntity="ClientOrder", mappedBy="tutorial")
+     */
+    private $clientOrders;
+
+    /**
      * One Tutorial has Many Videos.
      * @ORM\OneToMany(targetEntity="Video", mappedBy="tutorial")
      */
@@ -22,6 +28,7 @@ class Tutorial
 
     public function __construct() {
         $this->videos = new ArrayCollection();
+        $this->clientOrders = new ArrayCollection();
     }
 
 
