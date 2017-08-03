@@ -36,18 +36,30 @@ class DefaultController extends Controller
 //        $securityContext = $this->container->get('security.authorization_checker');
 //        if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->render('body/koszyk.html.twig');
+
 //        }else{
 //            return $this->redirectToRoute("/login");
 //        }
+
     }
 
     /**
-     * @Route("/{id}/tutorial")
+     * @Route("/{id}/tutorial/{id_video}", defaults={"id_video"=0})
      */
-    public function tutorialByIdAction($id)
+    public function tutorialByIdAction($id,$id_video)
     {
         $em=$this->getDoctrine()->getManager();
         $videos=$em->getRepository('AppBundle:Video')->findByTutorial($id);
-        return $this->render('body/videos.html.twig',['arr'=>$videos]);
+
+
+        $tutorial=$em->getRepository('AppBundle:Tutorial')->findById($id);
+
+        $comments=$em->getRepository('AppBundle:Comment')->findByVideo($id_video);
+
+
+        return $this->render('body/videos.html.twig',
+            ['tutorial'=>$tutorial,
+                'videos'=>$videos,
+             'comments'=>$comments]);
     }
 }

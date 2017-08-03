@@ -1,8 +1,22 @@
 {% block loginbar %}
+<<<<<<< HEAD
+    <div class="tlo">
+        <div class="loginbar">
+        {% if not app.user %}
+            <a href="/login">Zaloguj</a>
+            <a href="/register">Zarejestruj</a>
+        {% else %}
+            <a href="/profile">{{ app.user.name }}</a>
+            <a href="/logout">Wyloguj</a>
+        {% endif %}
+        </div>
+    </div>
+=======
     {% if not app.user %}
         <a href="/login">Zaloguj</a>
     {% else %}
         <a href="/profile">{{ app.user.name }}</a>
         <a href="/logout">Wyloguj</a>
     {% endif %}
+>>>>>>> b62fbf095bbc16196058d58695ce31bd47fff359
 {% endblock %}

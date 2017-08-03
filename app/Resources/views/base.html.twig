@@ -7,9 +7,13 @@
         <link rel="stylesheet" href="{{ asset('/css/main.css') }}" type="text/css"/>
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     </head>
     <body>
+
+
         {% block loginbar %}{% include 'loginbar/loginbar.html.twig' %}{% endblock %}
+        {% block slidebar %}{% endblock %}
         {% block navbar %}{% include 'navbar/navbar.html.twig' %}{% endblock %}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
