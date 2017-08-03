@@ -46,5 +46,11 @@ class DefaultController extends Controller
         return $this->render('body/videos.html.twig',['arr'=>$videos]);
     }
 
+    /**
+     * @param Request $request
+     * @Route("/dump", name="dump")
+     */
+    public function loginAction(Request $request){
 
+    }
 }
