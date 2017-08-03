@@ -31,14 +31,33 @@ class DefaultController extends Controller
     /**
      * @Route("/koszyk", name="koszyk")
      */
-    public function koszykAction()
+    public function koszykAction(Request $request)
     {
-        $securityContext = $this->container->get('security.authorization_checker');
-        if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            return $this->render('body/koszyk.html.twig');
+        $tutorialsToBuy = [];
+        $em = $this->getDoctrine()->getManager();
+        $session = $request->getSession();
+        $tutorials = $session->get('tutorial');
+        foreach($tutorials as $tutorialId){
+            $tutorialsToBuy[] = $em->getRepository('AppBundle:Tutorial')->findById($tutorialId);
         }
 
-        return $this->redirect("/login");
+        return $this->render('body/koszyk.html.twig', [
+            'tutorials' => $tutorialsToBuy
+        ]);
+    }
+
+    /**
+     * @Route("/deleteFromBusket/{id}", name="delete_from_busket")
+     */
+    public function deleteFromBusketAction(Request $request, $id){
+
+        $session = $request->getSession();
+        $tutorials = $session->get('tutorial');
+        if(($key = array_search($id, $tutorials)) !== false) {
+            unset($tutorials[$key]);
+            $session->set('tutorial', $tutorials);
+        }
+        return $this->redirectToRoute('koszyk');
     }
 
     /**
@@ -59,5 +78,21 @@ class DefaultController extends Controller
             ['tutorial'=>$tutorial,
                 'videos'=>$videos,
              'comments'=>$comments]);
+
+    }
+
+    /**
+     * @Route("/buy/{id}")
+     */
+    public function buyTutorialAction(Request $request, $id){
+
+        $session = $request->getSession();
+        $tutorials = $session->get('tutorial');
+        if(!in_array($id, $tutorials)){
+            $tutorials[] = $id;
+            $session->set('tutorial', $tutorials);
+        }
+        return $this->redirectToRoute('koszyk');
+
     }
 }
