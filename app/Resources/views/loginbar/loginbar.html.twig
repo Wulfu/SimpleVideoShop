@@ -4,5 +4,6 @@
         <a href="/register">Zarejestruj</a>
     {% else %}
         <a href="/profile">{{ app.user.name }}</a>
+        <a href="/logout">Wyloguj</a>
     {% endif %}
 {% endblock %}

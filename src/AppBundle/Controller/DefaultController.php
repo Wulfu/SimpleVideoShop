@@ -33,7 +33,10 @@ class DefaultController extends Controller
      */
     public function koszykAction()
     {
-        return $this->render('body/koszyk.html.twig');
+        $securityContext = $this->container->get('security.authorization_checker');
+        if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return $this->render('body/koszyk.html.twig');
+        }
     }
 
     /**
@@ -44,13 +47,5 @@ class DefaultController extends Controller
         $em=$this->getDoctrine()->getManager();
         $videos=$em->getRepository('AppBundle:Video')->findByTutorial($id);
         return $this->render('body/videos.html.twig',['arr'=>$videos]);
-    }
-
-    /**
-     * @param Request $request
-     * @Route("/dump", name="dump")
-     */
-    public function loginAction(Request $request){
-
     }
 }
