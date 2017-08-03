@@ -33,10 +33,12 @@ class DefaultController extends Controller
      */
     public function koszykAction()
     {
-        $securityContext = $this->container->get('security.authorization_checker');
-        if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+//        $securityContext = $this->container->get('security.authorization_checker');
+//        if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->render('body/koszyk.html.twig');
-        }
+//        }else{
+//            return $this->redirectToRoute("/login");
+//        }
     }
 
     /**
