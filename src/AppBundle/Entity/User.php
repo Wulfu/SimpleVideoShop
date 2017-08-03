@@ -57,6 +57,13 @@ class User extends BaseUser
      */
     protected $surname;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_coins", type="integer", nullable=true)
+     */
+    protected $user_coins;
+
     public function __construct()
     {
         parent::__construct();
@@ -101,6 +108,22 @@ class User extends BaseUser
     {
         $this->surname = $surname;
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getUserCoins()
+    {
+        return $this->user_coins;
+    }
+
+    /**
+     * @param int $user_coins
+     */
+    public function setUserCoins($user_coins)
+    {
+        $this->user_coins = $user_coins;
     }
 
 

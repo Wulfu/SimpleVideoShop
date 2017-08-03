@@ -48,6 +48,12 @@ class Tutorial
      */
     private $description;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="coins", type="integer", nullable=true)
+     */
+    protected $coins;
 
     /**
      * Get id
@@ -104,4 +110,23 @@ class Tutorial
     {
         return $this->description;
     }
+
+    /**
+     * @return int
+     */
+    public function getCoins()
+    {
+        return $this->coins;
+    }
+
+    /**
+     * @param int $coins
+     */
+    public function setCoins($coins)
+    {
+        $this->coins = $coins;
+    }
+
+
+
 }
