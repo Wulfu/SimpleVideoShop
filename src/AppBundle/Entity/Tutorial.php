@@ -134,6 +134,42 @@ class Tutorial
         $this->coins = $coins;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getClientOrders()
+    {
+        return $this->clientOrders;
+    }
+
+    /**
+     * @param mixed $clientOrders
+     * @return Tutorial
+     */
+    public function setClientOrders($clientOrders)
+    {
+        $this->clientOrders = $clientOrders;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVideos()
+    {
+        return $this->videos;
+    }
+
+    /**
+     * @param mixed $videos
+     * @return Tutorial
+     */
+    public function setVideos($videos)
+    {
+        $this->videos = $videos;
+        return $this;
+    }
+
 
 
 }

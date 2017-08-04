@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <a href="{{ path("moje_kursy") }}"><div>powrót do listy tutoriali</div></a>
+        <div><h3>{{ tutorial[0].title }}</h3></div>
+        <div>{{ tutorial[0].description }}</div>
+        {% for video in tutorial[0].videos %}
+                <a href="/"><p id="single_video">{{ video.title }}</p></a>
+        {% endfor %}
+
+    </div>
+{% endblock body %}
