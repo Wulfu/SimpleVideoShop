@@ -15,6 +15,11 @@
         {% block loginbar %}{% include 'loginbar/loginbar.html.twig' %}{% endblock %}
         {% block slidebar %}{% endblock %}
         {% block navbar %}{% include 'navbar/navbar.html.twig' %}{% endblock %}
+        {% block info %}
+            {% for flashMessage in app.session.flashbag.get('info') %}
+                {{ flashMessage }}
+            {% endfor %}
+        {% endblock %}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

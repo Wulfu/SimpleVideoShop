@@ -2,6 +2,9 @@
 
 {% block body %}
     <div class="container bottom-border">
+        {% if info is defined %}
+            {{ info }}
+        {% endif %}
         {% if not tutorials %}
            <p class="alert">Twój koszyk jest pusty</p>
         {% else %}

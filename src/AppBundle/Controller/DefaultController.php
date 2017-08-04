@@ -67,7 +67,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/{id}/tutorial/{id_video}", defaults={"id_video"=0})
+     * @Route("/{id}/tutorial/{id_video}", defaults={"id_video":"1"})
      */
     public function tutorialByIdAction(Request $request, $id, $id_video)
     {
@@ -82,8 +82,7 @@ class DefaultController extends Controller
 
         $comment = new Comment();
         $user = $this->container->get('security.context')->getToken()->getUser();
-        $comment->setUser($user);
-        $comment->setVideo($video[0]);
+
 
 
         $form = $this->createForm(CommentType::class, $comment);
@@ -92,6 +91,8 @@ class DefaultController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $time = (new \DateTime());
             $comment->setData(($time));
+            $comment->setUser($user);
+            $comment->setVideo($video[0]);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
@@ -142,11 +143,10 @@ class DefaultController extends Controller
         $user_coins = $user->getUserCoins();
 
         if($coins>$user_coins){
-            $info="Nie masz wystarczających środków aby dokonać zakupu";
-            return $this>redirectToRoute('koszyk', ['info'=>$info]);
+            $session->getFlashBag()->add('info', 'Nie masz wystarczających środków aby dokonać zakup');
+            return $this->redirectToRoute('koszyk');
         }else{
             foreach ($tutorials as $id){
-
                 $tutorial=$em->getRepository('AppBundle:Tutorial')->findOneById($id);
                 $order=new ClientOrder();
                 $order->setUser($user);
@@ -157,18 +157,20 @@ class DefaultController extends Controller
             $user->setUserCoins($user_coins-$coins);
             $em->flush();
             $session->invalidate();
-
+            unset($tutorials);
 
             return $this->redirect('/');
         }
     }
-
+    /* TODO send to login  anon user or render info */
     /**
      * @Route("/moje_kursy")
      */
+
     public function UserBasketAction(Request $request){
         $user = $this->container->get('security.context')->getToken()->getUser();
         $clientOrders = $user->getClientOrders();
+        dump($clientOrders);die;
         return $this->render('body/client_videos.html.twig', [
             'client' => $clientOrders
         ]);
