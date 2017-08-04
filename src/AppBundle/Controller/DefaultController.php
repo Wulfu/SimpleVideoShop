@@ -98,6 +98,7 @@ class DefaultController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush();
+            return $this->redirect(parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH));
         }
 
 
