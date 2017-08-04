@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <div class="container bottom-border">
+    <div class="container">
         {% if info is defined %}
             {{ info }}
         {% endif %}
@@ -10,7 +10,7 @@
         {% else %}
             {% for tutorial in tutorials %}
                <div class="basket">
-                   <a class="pull-left" href="{{ path('delete_from_busket', {'id': tutorial[0].id}) }}">
+                   <a class="basket-button pull-left" href="{{ path('delete_from_busket', {'id': tutorial[0].id}) }}">
                        <button class="button usun" style="vertical-align:middle">Usuń</button>
                    </a>
                    <div class="basket-title">
@@ -20,7 +20,7 @@
                </div>
                 <br/>
             {% endfor %}
-            <a class="pull-right" href="/realizacja"><button class="button realizuj" style="vertical-align:middle">Realizuj zamówienie</button></a>
+            <a class="basket-button pull-right" href="/realizacja"><button class="button realizuj" style="vertical-align:middle">Realizuj zamówienie</button></a>
 
         {% endif %}
 

@@ -1,14 +1,14 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <div class="container bottom-border">
+    <div class="container">
         <div class="player">
-            <iframe src="https://www.youtube.com/embed/010KyIQjkTk?ecver=2"></iframe>
+            <iframe src="https://www.youtube.com/embed/010KyIQjkTk?ecver=2" allowfullscreen=""></iframe>
         </div>
         <div class="list_videos">
 
     {% for value in videos %}
-                <a href="/{{ tutorial[0].id }}/tutorial/{{ value.id }}"><p id="single_video">{{ value.title }}</p></a>
+                <a href="/{{ tutorial[0].id }}/tutorial/{{ value.id }}"><div class="single_video">{{ value.title }}</div></a>
     {% endfor %}
 
         </div>
@@ -18,11 +18,21 @@
 
     </div>
 
-
-
     <br>
-    <div class="container bottom-border">
-        <div>{{ form(form) }}</div>
+    <div class="container">
+        <div>{{ form_start(form) }}
+            <div class="pull-left">
+                {{ form_widget(form.content) }}
+            </div>
+            <div class="pull-left">
+                {{ form_widget(form.Skomentuj) }}
+            </div>
+            {{ form_end(form) }}
+            <br>
+        </div>
+
+
+
             {% for value in comments %}
                 <div class="comment dashed-border">
                     <div class="comment-user">User</div>

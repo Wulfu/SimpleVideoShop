@@ -3,9 +3,8 @@ body{
 
 }
 .container{
-    border: solid;
-    border-width: 1px;
-    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 2%;
     margin-left: 15%;
     margin-right: 15%;
     background-color: #ffffff;
@@ -31,20 +30,20 @@ body{
 
 .margin10{margin-bottom:10px; margin-right:10px;}
 
-.loginbar{
-    background-color: #333333;
-    color: white;
-    display: block;
-    text-align: right;
-    padding: 5px;
-    height: 40px;
-}
-.tlo{
-    margin-bottom: 10px;
-    background-color: #3399ff;
-    height: 45px;
-}
 
+.loginbar{
+    margin-bottom: 2%;
+    overflow: hidden;
+    background-color: #66a3ff;
+    display:block;
+    color:white;
+    font-size: 14px;
+    padding: 5px;
+    font-weight: bold;
+    text-align: center;
+
+
+}
 .dashed-border{
     border-bottom: dashed;
     border-bottom-width: 2px;
@@ -62,10 +61,9 @@ body{
 /*navbar*/
 
 ul {
-    border-radius: 10px;
+    margin-bottom: 2%;
     margin-left: 15%;
     margin-right: 15%;
-    margin-bottom: 10px;
     list-style-type: none;
     overflow: hidden;
     color:#000000;
@@ -79,38 +77,50 @@ li {
 li a {
     display: block;
     color: #000000;
-    text-align: center;
-    padding:40px 50px;
+
+    padding:30px 45px;
     text-decoration: none;
 
+}
+.div-navbar{
+    text-align: center; font-size: 22px;
 }
 
 li a:hover {
     color:white;
-    background-color: #3399ff;
-    transition: 1s;
+    background-color: #66a3ff;
+    transition: 0s;
 }
+
+
 .player{
     float:left;
     margin: 10px;
     width:40%;
 }
+.panel{
+    margin: 20px;
+}
 
 .list_videos{
-    float:left;
+    float:right;
     width: 50%;
-    margin-right: 10px;
-    margin-left: 10px;
+   margin:20px;
 }
 
 .button_buy{
     clear:both;
 }
 
-#single_video{
+.single_video{
     color: white;
-    background-color: #6c6159;
-    text-decoration: none;
+    background-color: #66a3ff;
+    border-radius: 5px;
+    padding: 3px;
+    font-weight: bold;
+    padding-left: 5px;
+    font-size: 16px;
+    margin-bottom: 5px;
 }
 
 
@@ -214,17 +224,14 @@ li a:hover {
     margin-bottom:30px;
 }
 
-.basket{
-    display: block;
-    margin:10px;
-    margin-bottom:30px;
+.basket-button{
+    margin:15px;
 }
 .basket-title{
     font-size: 20px;
     width:80%;
     float:left;
-    margin-left: 5px;
-    margin-bottom:30px;
+    margin:15px;
 }
 
 /*comments*/

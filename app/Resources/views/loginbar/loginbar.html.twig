@@ -1,14 +1,24 @@
 {% block loginbar %}
 
-    <div class="tlo">
+    <div>
         <div class="loginbar">
+            <div class="pull-left">
+                <img src="{{ asset("img/social-fb.png") }}" alt="tutorial img">
+                <img src="{{ asset("img/social-yt.png") }}" alt="tutorial img">
+
+            </div>
+
+            <div class="pull-right">
         {% if not app.user %}
             <a href="/login">Zaloguj</a>
             <a href="/register">Zarejestruj</a>
         {% else %}
-            <a href="/profile">{{ app.user.name }}</a>
-            <a href="/logout">Wyloguj</a>
+            <a href="/logout">Wyloguj się</a>
+            <a href="/profile"> <img src="{{ asset("img/profil.png") }}" alt="Profil"></a>
         {% endif %}
+
+            </div>
+
         </div>
     </div>
 {% endblock %}
