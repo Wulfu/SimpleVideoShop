@@ -1,7 +1,12 @@
+{% extends 'base.html.twig' %}
+
 {% block body %}
     <div class="container">
-        {% for value in client %}
-            {{ dump(value) }}
+        {% for clientOrder in clientOrders %}
+            <a href="{{ path('moje_kursy_tutorial', {'id': clientOrder.tutorial.id}) }}"><div><h3>{{ clientOrder.tutorial.title }}</h3></div></a>
+            {#{% for video in clientOrder.tutorial.videos %}#}
+                {#<a href="/"><p id="single_video">{{ video.title }}</p></a>#}
+            {#{% endfor %}#}
         {% endfor %}
     </div>
 {% endblock body %}

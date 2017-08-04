@@ -7,6 +7,7 @@ use AppBundle\Entity\Comment;
 use AppBundle\Form\CommentType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Tutorial;
 use AppBundle\Entity\Video;
@@ -97,6 +98,7 @@ class DefaultController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush();
+            return $this->redirect(parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH));
         }
 
 
@@ -117,6 +119,18 @@ class DefaultController extends Controller
         if(null === $session->get('tutorial')){
             $session->set('tutorial', []);
         }
+
+        $user = $this->container->get('security.context')->getToken()->getUser();
+
+        $em = $this->getDoctrine()->getManager();
+        $clientOrder = $em->getRepository('AppBundle:ClientOrder')->findByUser($user);
+        foreach($clientOrder as $singleOrder){
+            $tutorialId = $singleOrder->getTutorial()->getId();
+            if($tutorialId === intval($id)){
+                $session->getFlashBag()->add('info', 'Posiadasz już ten kurs.');
+                return $this->redirectToRoute('moje_kursy');
+            }
+        }
         $tutorials = $session->get('tutorial');
             if (!in_array($id, $tutorials)) {
                 $tutorials[] = $id;
@@ -128,6 +142,7 @@ class DefaultController extends Controller
     /**
      * @Route("/realizacja")
      */
+    /*TODO add date to order*/
     public function orderRealisationAction(Request $request){
 
         $session = $request->getSession();
@@ -162,17 +177,32 @@ class DefaultController extends Controller
             return $this->redirect('/');
         }
     }
-    /* TODO send to login  anon user or render info */
-    /**
-     * @Route("/moje_kursy")
-     */
 
+    /**
+     * @Route("/moje_kursy", name="moje_kursy")
+     */
     public function UserBasketAction(Request $request){
         $user = $this->container->get('security.context')->getToken()->getUser();
         $clientOrders = $user->getClientOrders();
-        dump($clientOrders);die;
+
+
+        //$em = $this->getDoctrine()->getManager();
+        //$tutorials = $em->getRepository('AppBundle:Tutorial')->findById($id);
+
         return $this->render('body/client_videos.html.twig', [
-            'client' => $clientOrders
+            'clientOrders' => $clientOrders
         ]);
     }
+    /**
+     * @Route("moje_kursy/tutorial/videos/{id}", name="moje_kursy_tutorial")
+     */
+    public function showClientTutorial($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $tutorial=$em->getRepository('AppBundle:Tutorial')->findById($id);
+        return $this->render('client_videos/tutorial_view.html.twig', [
+            'tutorial' => $tutorial
+        ]);
+    }
+
 }

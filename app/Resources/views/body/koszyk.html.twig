@@ -1,10 +1,12 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
+
     <div class="container">
         {% if info is defined %}
             {{ info }}
         {% endif %}
+
         {% if not tutorials %}
            <p class="alert">Twój koszyk jest pusty</p>
         {% else %}
