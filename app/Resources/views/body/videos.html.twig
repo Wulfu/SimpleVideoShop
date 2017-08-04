@@ -1,12 +1,10 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <div class="container" style="height: 300px">
-        <div>Little navigation</div>
+    <div class="container bottom-border">
         <div class="player">
-            <iframe src="https://www.youtube.com/embed/010KyIQjkTk?ecver=2" style="position:absolute;width:450px;height:250px;left:0" width="450" height="250" frameborder="0" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/010KyIQjkTk?ecver=2"></iframe>
         </div>
-
         <div class="list_videos">
 
     {% for value in videos %}
@@ -14,27 +12,26 @@
     {% endfor %}
 
         </div>
+        <div class="button_buy">
+            <a href="/buy/{{ tutorial[0].id }}"><button class="button buy" style="vertical-align:middle">Kup</button></a>
+        </div>
 
-        <p class="button_buy"><a href="/buy/{{ tutorial[0].id }}"><button>Kup tutorial</button></a></p>
     </div>
 
 
 
     <br>
-    <div class="container">
-        {{ form(form) }}
+    <div class="container bottom-border">
+        <div>{{ form(form) }}</div>
             {% for value in comments %}
-                <div class="single">
-                    <h1>User</h1>
-                    <div>
-                        <p>{{ value.content }} </p>
-                        {{ value.data|date('Y.m.d H:i:s') }}
-
+                <div class="comment dashed-border">
+                    <div class="comment-user">User</div>
+                    <div class="comment-date">{{ value.data|date('Y.m.d') }}</div>
+                    <div class="comment-content">
+                            {{ value.content }}
                     </div>
-
                 </div>
             {% endfor %}
-
     <div>
 
 {% endblock body %}

@@ -53,7 +53,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/deleteFromBusket/{id}", name="delete_from_busket")
+     * @Route("/deleteFromBusket/{id}", name="delete_from_busket", requirements={"id": "\d+"})
      */
     public function deleteFromBusketAction(Request $request, $id){
 
@@ -67,7 +67,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/{id}/tutorial/{id_video}", defaults={"id_video"=0})
+     * @Route("/{id}/tutorial/{id_video}", defaults={"id_video":1})
      */
     public function tutorialByIdAction(Request $request, $id, $id_video)
     {

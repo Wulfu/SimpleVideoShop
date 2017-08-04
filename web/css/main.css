@@ -82,31 +82,37 @@ li a {
     text-align: center;
     padding:40px 50px;
     text-decoration: none;
+
 }
 
 li a:hover {
     color:white;
     background-color: #3399ff;
+    transition: 1s;
+}
+.player{
+    float:left;
+    margin: 10px;
+    width:40%;
 }
 
-
 .list_videos{
-    float:right;
-    width:47%;
+    float:left;
+    width: 50%;
     margin-right: 10px;
+    margin-left: 10px;
+}
+
+.button_buy{
+    clear:both;
 }
 
 #single_video{
     color: white;
-    padding: 2px;
     background-color: #6c6159;
+    text-decoration: none;
 }
-.player{
-    float:left;
-    margin-left: 10px;
 
-    position:relative;height:0;padding-bottom:55.56%;
-}
 
 .mySlides {display:none}
 .w3-left, .w3-right, .w3-badge {cursor:pointer}
@@ -187,7 +193,7 @@ li a:hover {
     opacity: 0;
     top: 0;
     right: -20px;
-    transition: 0.5s;
+    transition: 0.2s;
 }
 
 .button:hover span {
@@ -219,4 +225,21 @@ li a:hover {
     float:left;
     margin-left: 5px;
     margin-bottom:30px;
+}
+
+/*comments*/
+.comment{
+    clear:both;
+    margin:20px;
+}
+
+.comment-date{
+    float:right;
+}
+
+.comment-user{
+    float:left;
+}
+.comment-content{
+    clear:both;
 }
