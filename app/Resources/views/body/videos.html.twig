@@ -30,12 +30,9 @@
             {{ form_end(form) }}
             <br>
         </div>
-
-
-
             {% for value in comments %}
                 <div class="comment dashed-border">
-                    <div class="comment-user">User</div>
+                    <div class="comment-user">{{ value.user.name }}</div>
                     <div class="comment-date">{{ value.data|date('Y.m.d') }}</div>
                     <div class="comment-content">
                             {{ value.content }}

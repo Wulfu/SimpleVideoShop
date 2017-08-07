@@ -116,7 +116,7 @@ class DefaultController extends Controller
     public function buyTutorialAction(Request $request, $id){
 
         $session = $request->getSession();
-        if(null === $session->get('tutorial')){
+        if($session->get('tutorial') === null){
             $session->set('tutorial', []);
         }
 
@@ -166,6 +166,7 @@ class DefaultController extends Controller
                 $order=new ClientOrder();
                 $order->setUser($user);
                 $order->setTutorial($tutorial);
+                $order->setDate(new \DateTime());
                 $em->persist($order);
                 $em->flush();
             }
@@ -174,7 +175,7 @@ class DefaultController extends Controller
             $session->invalidate();
             unset($tutorials);
 
-            return $this->redirect('/');
+            return $this->redirect('moje_kursy');
         }
     }
 

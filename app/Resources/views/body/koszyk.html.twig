@@ -4,11 +4,11 @@
 
     <div class="container">
         {% if info is defined %}
-            {{ info }}
+            <div class="alert2">{{ info }}</div>
         {% endif %}
 
         {% if not tutorials %}
-           <p class="alert">Twój koszyk jest pusty</p>
+           <div class="alert">Twój koszyk jest pusty</div>
         {% else %}
             {% for tutorial in tutorials %}
                <div class="basket">
@@ -17,6 +17,7 @@
                    </a>
                    <div class="basket-title">
                        {{ tutorial[0].title }}
+                       <p>Price: {{ tutorial[0].coins }}</p>
                    </div>
 
                </div>
