@@ -12,4 +12,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class CommentRepository extends EntityRepository
 {
+    public function getVideoComments($id){
+        $comments = $this->getEntityManager()->createQuery('
+            SELECT c FROM AppBundle:Comment c WHERE c.video = :id ORDER BY c.data DESC
+        ')->setParameter('id',$id)->getResult();
+        return $comments;
+    }
 }

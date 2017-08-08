@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\AppBundle;
 use AppBundle\Entity\ClientOrder;
 use AppBundle\Entity\Comment;
 use AppBundle\Form\CommentType;
@@ -13,6 +14,7 @@ use AppBundle\Entity\Tutorial;
 use AppBundle\Entity\Video;
 use AppBundle\Entity\User;
 use Symfony\Component\Validator\Constraints\DateTime;
+use AppBundle\Repository\CommentRepository;
 
 class DefaultController extends Controller
 {
@@ -79,7 +81,8 @@ class DefaultController extends Controller
         $video=$em->getRepository('AppBundle:Video')->findById($id_video);
 
         $tutorial=$em->getRepository('AppBundle:Tutorial')->findById($id);
-        $comments=$em->getRepository('AppBundle:Comment')->findByVideo($id_video);
+        //$comments=$em->getRepository('AppBundle:Comment')->findByVideo($id_video);
+        $comments = $this->getDoctrine()->getRepository('AppBundle:Comment')->getVideoComments($id_video);
 
         $comment = new Comment();
         $user = $this->container->get('security.context')->getToken()->getUser();
@@ -106,7 +109,8 @@ class DefaultController extends Controller
             'tutorial'=>$tutorial,
             'videos'=>$videos,
             'form'=> $form->createView(),
-            'comments'=>$comments]);
+            'comments'=>$comments
+        ]);
 
     }
 

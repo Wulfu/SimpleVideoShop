@@ -33,7 +33,7 @@
             {% for value in comments %}
                 <div class="comment dashed-border">
                     <div class="comment-user">{{ value.user.name }}</div>
-                    <div class="comment-date">{{ value.data|date('Y.m.d') }}</div>
+                    <div class="comment-date">{{ value.data|date('H:i:s Y.m.d') }}</div>
                     <div class="comment-content">
                             {{ value.content }}
                     </div>
