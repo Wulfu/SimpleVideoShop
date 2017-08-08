@@ -3,7 +3,9 @@
 {% block body %}
 
     <div class="container">
-
+        {% if not tutorials %}
+           <div class="alert">Twój koszyk jest pusty</div>
+        {% else %}
             {% for tutorial in tutorials %}
                <div class="basket">
                    <a class="basket-button pull-left" href="{{ path('delete_from_busket', {'id': tutorial[0].id}) }}">
@@ -18,7 +20,8 @@
                 <br/>
             {% endfor %}
             <a class="basket-button pull-right" href="/realizacja"><button class="button realizuj" style="vertical-align:middle">Realizuj zamówienie</button></a>
-            {% endif %}
+
+        {% endif %}
 
     </div>
 {% endblock body %}

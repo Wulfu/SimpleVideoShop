@@ -160,15 +160,27 @@ class DefaultController extends Controller
         $session = $request->getSession();
         $tutorials = $session->get('tutorial');
         $em = $this->getDoctrine()->getManager();
+
         $coins=0;
         /* to correct */
         foreach ($tutorials as $id){
             $tutorial=$em->getRepository('AppBundle:Tutorial')->findById($id);
             $coins+=$tutorial[0]->getCoins();
         }
+
         $user=$this->container->get('security.context')->getToken()->getUser();
         $user_coins = $user->getUserCoins();
+        $clientOrder = $em->getRepository('AppBundle:ClientOrder')->findByUser($user);
 
+        foreach($clientOrder as $singleOrder){
+            $tutorialId = $singleOrder->getTutorial()->getId();
+            foreach($tutorials as $singleTutorial){
+                if($tutorialId === intval($singleTutorial)){
+                    $session->getFlashBag()->add('info', 'Posiadasz już ten kurs. Usuń go z koszyka jeśli chcesz kontynuować');
+                    return $this->redirectToRoute('koszyk');
+                }
+            }
+        }
         if($coins>$user_coins){
             $session->getFlashBag()->add('info', 'Nie masz wystarczających środków aby dokonać zakup');
             return $this->redirectToRoute('koszyk');
