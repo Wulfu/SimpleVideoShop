@@ -14,7 +14,6 @@ use AppBundle\Entity\Tutorial;
 use AppBundle\Entity\Video;
 use AppBundle\Entity\User;
 use Symfony\Component\Validator\Constraints\DateTime;
-use AppBundle\Repository\CommentRepository;
 
 class DefaultController extends Controller
 {
@@ -88,22 +87,30 @@ class DefaultController extends Controller
         $user = $this->container->get('security.context')->getToken()->getUser();
 
 
-
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $time = (new \DateTime());
-            $comment->setData(($time));
-            $comment->setUser($user);
-            $comment->setVideo($video[0]);
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($comment);
-            $em->flush();
-            return $this->redirect(parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH));
-        }
-
+            if($form->isSubmitted() && $form->isValid() && $user !== "anon.") {
+                $clientOrder = $em->getRepository('AppBundle:ClientOrder')->findByUser($user);
+                foreach($clientOrder as $singleOrder){
+                    $tutorialId = $singleOrder->getTutorial()->getId();
+                    if($tutorialId === intval($id)){
+                        $time = (new \DateTime());
+                        $comment->setData(($time));
+                        $comment->setUser($user);
+                        $comment->setVideo($video[0]);
+                        $em->persist($comment);
+                        $em->flush();
+                    }
+                }
+                $session = $request->getSession();
+                $session->getFlashBag()->add('info', 'Musisz posiadać ten tutorial aby móc go komentować.');
+                return $this->redirect(parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH));
+            }elseif ($form->isSubmitted() && $user === "anon.") {
+                $session = $request->getSession();
+                $session->getFlashBag()->add('info', 'Musisz być zalogowany i posiadać ten kurs aby skomentować video');
+            }
 
         return $this->render('body/videos.html.twig', [
             'tutorial'=>$tutorial,
@@ -117,6 +124,7 @@ class DefaultController extends Controller
     /**
      * @Route("/buy/{id}")
      */
+    /*TODO buying duplicate items after putting in basket and than login */
     public function buyTutorialAction(Request $request, $id){
 
         $session = $request->getSession();
@@ -146,7 +154,7 @@ class DefaultController extends Controller
     /**
      * @Route("/realizacja")
      */
-    /*TODO add date to order*/
+
     public function orderRealisationAction(Request $request){
 
         $session = $request->getSession();
@@ -189,8 +197,6 @@ class DefaultController extends Controller
     public function UserBasketAction(Request $request){
         $user = $this->container->get('security.context')->getToken()->getUser();
         $clientOrders = $user->getClientOrders();
-
-
         //$em = $this->getDoctrine()->getManager();
         //$tutorials = $em->getRepository('AppBundle:Tutorial')->findById($id);
 

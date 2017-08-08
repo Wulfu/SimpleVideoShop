@@ -17,7 +17,7 @@
         {% block navbar %}{% include 'navbar/navbar.html.twig' %}{% endblock %}
         {% block info %}
             {% for flashMessage in app.session.flashbag.get('info') %}
-                {{ flashMessage }}
+                <div class="alert2">{{ flashMessage }}</div>
             {% endfor %}
         {% endblock %}
         {% block body %}{% endblock %}

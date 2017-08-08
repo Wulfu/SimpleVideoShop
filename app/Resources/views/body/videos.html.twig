@@ -29,6 +29,13 @@
             </div>
             {{ form_end(form) }}
             <br>
+            {% if app.session.flashBag.has('info') %}
+                <div class="alert alert-success">
+                    {% for msg in app.session.flashBag.get('info') %}
+                        {{ msg }}
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
             {% for value in comments %}
                 <div class="comment dashed-border">
