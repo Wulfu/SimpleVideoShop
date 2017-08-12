@@ -3,4 +3,8 @@
 <div class="fos_user_user_show">
     <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
     <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+    <p>Imię: {{ user.name }}</p>
+    <p>Nazwisko: {{ user.surname }}</p>
+    <a href="{{ path('fos_user_profile_edit') }}"><button>Edytuj profil</button></a>
+    <a href="{{ path('fos_user_change_password') }}"><button>Zmień hasło</button></a>
 </div>
